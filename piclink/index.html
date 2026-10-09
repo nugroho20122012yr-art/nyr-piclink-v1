@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nyr PicLink — Upload sekali, pakai di mana-mana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top"><div class="in"><a class="logo" href="index.html">Nyr PicLink</a><span class="tag">#nyr-tools</span><nav><a class="btn on" href="index.html">Upload gambar</a><a class="btn" href="qr.html">Buat QR</a></nav></div></header>
+<div class="ticker" aria-hidden="true"><div>GRATIS &nbsp;★&nbsp; TANPA LOGIN &nbsp;★&nbsp; LINK ACAK &nbsp;★&nbsp; QR INSTAN &nbsp;★&nbsp; UNTUK BACKGROUND WEB &nbsp;★&nbsp; GRATIS &nbsp;★&nbsp; TANPA LOGIN &nbsp;★&nbsp; LINK ACAK &nbsp;★&nbsp; QR INSTAN &nbsp;★&nbsp; UNTUK BACKGROUND WEB &nbsp;★&nbsp;</div></div>
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <h1>Upload sekali, pakai di mana-mana.</h1>
+      <p>Ubah gambar jadi link acak untuk background web atau QR code. Gratis, tanpa login, tanpa batas jumlah upload.</p>
+      <div class="chips"><span>Gratis</span><span>Tanpa login</span><span>Link acak 16 karakter</span></div>
+    </div>
+    <div class="box">
+      <span class="sticker">GRATIS!</span>
+      <label class="drop" id="drop">
+        Tarik gambar ke sini atau klik untuk memilih
+        <input type="file" id="file" accept="image/png,image/jpeg,image/webp,image/gif">
+      </label>
+      <p style="margin:12px 0 0;font-size:.9rem">PNG, JPG, WEBP, atau GIF. File di atas 2 MB dikompres otomatis.</p>
+      <div class="bar" id="bar"><i id="fill"></i></div>
+      <div class="err" id="err" role="alert"></div>
+    </div>
+  </section>
+
+  <div class="box" id="result">
+    <img id="preview" alt="Pratinjau gambar yang diupload">
+    <div class="field"><label for="direct">Link langsung (untuk background)</label>
+      <div class="row"><input id="direct" readonly><button data-copy="direct">Salin</button></div></div>
+    <div class="field"><label for="view">Link halaman (untuk QR)</label>
+      <div class="row"><input id="view" readonly><button data-copy="view">Salin</button></div></div>
+    <div class="field"><label for="css">Snippet CSS background</label>
+      <div class="row"><textarea id="css" rows="4" readonly></textarea><button data-copy="css">Salin</button></div></div>
+    <div class="field"><label for="html">Snippet HTML</label>
+      <div class="row"><textarea id="html" rows="2" readonly></textarea><button data-copy="html">Salin</button></div></div>
+    <div class="field"><label>QR code (isinya link halaman)</label>
+      <div id="qr"></div><br><br>
+      <button id="dlqr">Unduh QR</button></div>
+  </div>
+
+  <section class="sec">
+    <h2>Bisa dipakai buat apa?</h2>
+    <div class="grid">
+      <div class="card c1"><h3>Background web</h3><p>Dapat link gambar langsung yang tinggal ditaruh di CSS atau HTML.</p></div>
+      <div class="card c2"><h3>QR yang buka gambar</h3><p>Scan QR-nya, gambar langsung tampil di halaman.</p></div>
+      <div class="card c3"><h3>Buat QR bebas</h3><p>Tempel link atau teks apa saja, lalu unduh QR beresolusi tinggi.</p></div>
+      <div class="card c4"><h3>Link tak bisa ditebak</h3><p>Setiap gambar punya UID acak 16 karakter yang berbeda.</p></div>
+    </div>
+  </section>
+
+  <section class="sec" id="cara">
+    <h2>Cara pakai</h2>
+    <div class="grid">
+      <div class="card step c4"><b>1</b><h3>Pilih gambar</h3><p>Tarik atau pilih gambar dari perangkatmu.</p></div>
+      <div class="card step c1"><b>2</b><h3>Salin link</h3><p>Link langsung, link halaman, dan snippet siap disalin.</p></div>
+      <div class="card step c2"><b>3</b><h3>Pasang atau scan</h3><p>Taruh di kode web, atau unduh QR-nya.</p></div>
+    </div>
+    <p style="margin:26px 0 10px"><b>Contoh pemakaian sebagai background:</b></p>
+    <pre class="code">body {
+  background: url("https://nyr-piclink-v1.vercel.app/i/UIDKAMU.png")
+              center / cover no-repeat fixed;
+}</pre>
+    <p>Dipakai lewat CSS, gambarnya lebih sulit diunduh dengan tekan lama dibanding tag gambar biasa.</p>
+  </section>
+
+  <section class="sec" id="faq">
+    <h2>Tanya jawab</h2>
+    <details><summary>Apakah benar-benar gratis?</summary><p>Ya. Tanpa login dan tanpa batas jumlah upload. Ukuran per gambar maksimal 2 MB, file yang lebih besar dikompres otomatis.</p></details>
+    <details><summary>Format gambar apa yang didukung?</summary><p>PNG, JPG, WEBP, dan GIF. GIF maksimal 2 MB.</p></details>
+    <details><summary>Bisakah gambar yang sudah diupload dihapus?</summary><p>Belum ada fitur hapus. Simpan linknya dengan baik.</p></details>
+    <details><summary>Warna QR bisa diubah?</summary><p>Tidak. QR selalu hitam di atas putih supaya mudah dipindai.</p></details>
+  </section>
+</main>
+<footer class="foot"><b>Nyr PicLink</b> &nbsp;#nyr-tools<br>Upload sekali, pakai di mana-mana.<br>Dev: Nugroho YR Dev</footer>
+<script src="../anti-clone.js" data-mode="guard"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

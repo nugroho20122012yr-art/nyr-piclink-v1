@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buat QR — Nyr PicLink</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top"><div class="in"><a class="logo" href="index.html">Nyr PicLink</a><span class="tag">#nyr-tools</span><nav><a class="btn" href="index.html">Upload gambar</a><a class="btn on" href="qr.html">Buat QR</a></nav></div></header>
+<div class="ticker" aria-hidden="true"><div>GRATIS &nbsp;★&nbsp; TANPA LOGIN &nbsp;★&nbsp; LINK ACAK &nbsp;★&nbsp; QR INSTAN &nbsp;★&nbsp; UNTUK BACKGROUND WEB &nbsp;★&nbsp; GRATIS &nbsp;★&nbsp; TANPA LOGIN &nbsp;★&nbsp; LINK ACAK &nbsp;★&nbsp; QR INSTAN &nbsp;★&nbsp; UNTUK BACKGROUND WEB &nbsp;★&nbsp;</div></div>
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <h1>Tempel link, jadi QR.</h1>
+      <p>Buat QR code dari link atau teks apa saja, lalu unduh dalam resolusi tinggi. QR selalu hitam di atas putih.</p>
+      <div class="chips"><span>Gratis</span><span>Tanpa login</span><span>Maks 200 karakter</span></div>
+    </div>
+    <div class="box">
+      <span class="sticker">INSTAN!</span>
+      <div class="field"><label for="txt">Link atau teks</label>
+        <textarea id="txt" rows="3" maxlength="200" placeholder="https://contoh.com" style="width:100%;font:14px 'Space Mono',monospace;border:3px solid #151515;padding:8px;resize:vertical"></textarea></div>
+      <button id="make">Buat QR</button>
+      <div class="err" id="err" role="alert"></div>
+    </div>
+  </section>
+  <div class="box" id="result">
+    <div id="qr"></div><br><br>
+    <button id="dl">Unduh QR</button>
+  </div>
+</main>
+<footer class="foot"><b>Nyr PicLink</b> &nbsp;#nyr-tools<br>Upload sekali, pakai di mana-mana.<br>Dev: Nugroho YR Dev</footer>
+<script src="../anti-clone.js" data-mode="guard"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script type="module">
+import { renderQR, downloadQR } from "./qr.js";
+const $ = (id) => document.getElementById(id);
+function make() {
+  const t = $("txt").value.trim();
+  $("err").style.display = "none";
+  try { renderQR($("qr"), t); $("result").style.display = "block"; }
+  catch (e) { $("err").textContent = e.message; $("err").style.display = "block"; $("result").style.display = "none"; }
+}
+$("make").addEventListener("click", make);
+$("dl").addEventListener("click", () => downloadQR($("qr")));
+</script>
+</body>
+</html>

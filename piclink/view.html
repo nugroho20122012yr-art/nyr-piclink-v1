@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gambar — Nyr PicLink</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top"><div class="in"><a class="logo" href="index.html">Nyr PicLink</a><span class="tag">#nyr-tools</span><nav><a class="btn" href="index.html">Upload gambar</a><a class="btn" href="qr.html">Buat QR</a></nav></div></header>
+<main class="wrap"><div id="out"><p>Memuat gambar…</p></div></main>
+<footer class="foot"><b>Nyr PicLink</b> &nbsp;#nyr-tools<br>Upload sekali, pakai di mana-mana.<br>Dev: Nugroho YR Dev</footer>
+<script src="../anti-clone.js" data-mode="guard"></script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-database.js";
+import { firebaseConfig } from "./firebase-config.js";
+const db = getDatabase(initializeApp(firebaseConfig));
+const out = document.getElementById("out");
+const id = new URLSearchParams(location.search).get("id");
+try {
+  const snap = id && /^[A-Za-z0-9]{16}$/.test(id) ? await get(ref(db, "images/" + id)) : null;
+  if (!snap || !snap.exists()) throw 0;
+  const { d, t } = snap.val();
+  if (!/^image\/(png|jpeg|webp|gif)$/.test(t)) throw 0;
+  out.innerHTML = `<img class="imgview" src="data:${t};base64,${d}" alt="Gambar">`;
+} catch { out.innerHTML = '<div class="box"><b>Gambar tidak ditemukan.</b> Link salah atau gambar sudah dihapus.</div>'; }
+</script>
+</body>
+</html>

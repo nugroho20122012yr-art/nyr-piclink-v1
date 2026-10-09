@@ -1,0 +1,18 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "images": {
+      "$id": {
+        ".read": true,
+        ".write": "!data.exists() && newData.exists() && $id.matches(/^[A-Za-z0-9]{16}$/)",
+        ".validate": "newData.hasChildren(['d','t','s','c'])",
+        "d": { ".validate": "newData.isString() && newData.val().length < 3000000" },
+        "t": { ".validate": "newData.isString() && newData.val().matches(/^image\\/(png|jpeg|webp|gif)$/)" },
+        "s": { ".validate": "newData.isNumber() && newData.val() <= 2000000" },
+        "c": { ".validate": "newData.val() == now" },
+        "$other": { ".validate": false }
+      }
+    }
+  }
+}
